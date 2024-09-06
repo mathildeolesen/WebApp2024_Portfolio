@@ -1,0 +1,137 @@
+{
+  "projects": [
+    {
+      "id": "1111-1111-1111",
+      "title": "Fullstack webapplikasjon",
+      "description": "Fullstack webapplikasjon bla bla kort beskrivelse",
+      "tags": [
+        "Node",
+        "TypeScript",
+        "React",
+        "REST",
+        "Backend",
+        "Frontend",
+        "Fullstack"
+      ],
+      "coverImage": "https://placehold.co/400"
+    },
+    {
+      "id": "2222-2222-2222",
+      "title": "Portfolio",
+      "description": "Portfolio med React, REST, server, m.m. bla bla kort beskrivelse",
+      "tags": [
+        "Node",
+        "TypeScript",
+        "React",
+        "REST",
+        "Backend",
+        "Frontend",
+        "Fullstack"
+      ],
+      "coverImage": "https://placehold.co/400"
+    },
+    {
+      "id": "bce56abf-9b3b-4e1a-93b6-9f11eb0576b5",
+      "title": "Hyyy",
+      "tags": [
+        "test",
+        "jada"
+      ],
+      "description": "hei"
+    },
+    {
+      "id": "b4528f57-66dc-4e16-ac8f-a75cc9527f4b",
+      "title": "Test",
+      "tags": [
+        "test",
+        "haha"
+      ],
+      "description": "Jaaa"
+    },
+    {
+      "id": "fae64983-882c-43a0-bbd1-b0b1254837b4",
+      "title": "Test",
+      "tags": [
+        "test",
+        "haha"
+      ],
+      "description": "Jaaa"
+    },
+    {
+      "id": "1dbc543b-8c92-4e82-8f69-05a12d086986",
+      "title": "Test",
+      "tags": [
+        "test",
+        "haha"
+      ],
+      "description": "Jaaa"
+    },
+    {
+      "id": "cc22d56e-f908-477c-9b6d-98af33d68e68",
+      "title": "Test",
+      "tags": [
+        "test",
+        "haha"
+      ],
+      "description": "Jaaa"
+    },
+    {
+      "id": "d2b67792-c7b0-4f42-b6f6-413a4b7d9019",
+      "title": "Test",
+      "tags": [
+        "test",
+        "haha"
+      ],
+      "description": "Jaaa"
+    },
+    {
+      "id": "6732c296-3ded-4035-b36c-8d8070d26618",
+      "title": "Oki",
+      "tags": [
+        "sldo"
+      ],
+      "description": "kdkdk"
+    },
+    {
+      "id": "de90428b-4301-4101-a0d1-be2a02ed9922",
+      "title": "Testaa",
+      "tags": [
+        "ol",
+        "lo"
+      ],
+      "description": "wekwoek"
+    },
+    {
+      "id": "ec12e6f4-ca0c-4eaf-92f2-9ed503fbca29",
+      "title": "",
+      "tags": [
+        ""
+      ],
+      "description": ""
+    },
+    {
+      "id": "1dceddba-9195-4337-a3df-8851824d6f8c",
+      "title": "",
+      "tags": [
+        ""
+      ],
+      "description": ""
+    },
+    {
+      "id": "d20f5f59-51cf-4737-a849-4c540aec9813",
+      "title": "",
+      "tags": [
+        ""
+      ],
+      "description": ""
+    },
+    {
+      "id": "75161180-51d3-48a6-9997-c85bad7d39ee",
+      "title": "Test",
+      "tags": [
+        "test"
+      ],
+      "description": "Test"
+    }
+  ]
+}

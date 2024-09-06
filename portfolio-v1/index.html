@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <main>
+      <section id="welcome">
+        <figure>
+          <img src="https://placehold.co/200"/>
+        </figure>
+        <article>
+          <h1>Hei! Jeg heter Mathilde 🙂</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Nunc ante elit, tempus eu est et, cursus laoreet elit. 
+            Quisque vitae  facilisis elit. 
+          </p>
+        </article>
+      </section>
+      <section id="display">
+        <div id="displayHeader">
+          <h2>Prosjekter</h2>
+          <button id="showFormButton">Legg til prosjekt</button>
+        </div>
+        <div id="projectsContainer">
+        <!-- renderProjectsDisplay -->
+        </div>
+        <article id="projectFormContainer">
+          <div id="formHeader">
+            <h2>Legg til nytt prosjekt</h2>
+            <button id="cancelFormButton">Avbryt</button>
+          </div>
+          <form id="projectForm">
+            <div id="title">
+              <label for="title">Tittel</label>
+              <input type="text" id="title" name="title" required>
+            </div>
+            <div id="tags">
+              <label for="tags">Tags</label>
+              <input type="text" id="tags" name="tags" required>
+            </div>
+            <div id="description">
+              <label for="description">Beskrivelse</label>
+              <input type="text" id="description" name="description" required>
+            </div>
+            <div id="coverImage">
+              <label for="coverImage">Bilde</label>
+              <input type="file" id="coverImage" name="coverImage">
+            </div>
+            <button type="submit">Legg til</button>
+          </form>
+         </article>
+      </section>
+      
+    </main>
+    <script type="module" src="frontend/main.ts"></script>
+  </body>
+</html>
