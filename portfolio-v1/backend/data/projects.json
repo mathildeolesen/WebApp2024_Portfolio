@@ -1,0 +1,42 @@
+{
+  "projects": [
+    {
+      "id": "1111-1111-1111",
+      "title": "Fullstack webapplikasjon",
+      "description": "Fullstack webapplikasjon bla bla kort beskrivelse",
+      "tags": [
+        "Node",
+        "TypeScript",
+        "React",
+        "REST",
+        "Backend",
+        "Frontend",
+        "Fullstack"
+      ],
+      "coverImage": "https://placehold.co/400"
+    },
+    {
+      "id": "2222-2222-2222",
+      "title": "Portfolio",
+      "description": "Portfolio med React, REST, server, m.m. bla bla kort beskrivelse",
+      "tags": [
+        "Node",
+        "TypeScript",
+        "React",
+        "REST",
+        "Backend",
+        "Frontend",
+        "Fullstack"
+      ],
+      "coverImage": "https://placehold.co/400"
+    },
+    {
+      "id": "33d4576a-e3e4-420a-8c9c-d482508e759e",
+      "title": "Tittel",
+      "tags": [
+        "tag"
+      ],
+      "description": "Dette er et test prosjekt"
+    }
+  ]
+}
