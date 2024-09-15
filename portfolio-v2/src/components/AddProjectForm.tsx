@@ -1,10 +1,12 @@
-export default function AddProjectForm() {
+export default function AddProjectForm({ toggleForm }: { toggleForm: () => void }) {
+  // { toggleForm }: { toggleForm: () => void} 
+  // toggleForm is a funksjon that has no parameters () and no return => void
 
     return (
         <article id="projectFormContainer">
           <div id="formHeader">
             <h2>Legg til nytt prosjekt</h2>
-            <button id="cancelFormButton">Avbryt</button>
+            <button id="cancelFormButton" onClick={toggleForm}>Avbryt</button>
           </div>
           <form id="projectForm">
             <div id="title">

@@ -59,6 +59,8 @@ body {
     align-items: center;
     padding: 1.3em 0;
 
+    position: relative;
+
     border-radius: 18px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06); /* Subtle shadow */
 
@@ -106,7 +108,7 @@ body {
     background-color: rgba(245, 245, 245, 1); 
     z-index: 1000; /* Sørg for at den ligger over andre elementer */
 
-    display: none; /* flex; when toggled */
+    display: flex;
     flex-direction: column; 
 
     gap: 2em;
