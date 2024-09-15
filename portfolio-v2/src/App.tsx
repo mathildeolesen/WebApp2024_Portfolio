@@ -1,7 +1,11 @@
+import ProjectSection from "./components/ProjectSection";
+import WelcomeCard from "./components/WelcomeCard";
+
 function App() {
   return (
     <main>
-      <h1>Velkommen!</h1>
+      <WelcomeCard/>
+      <ProjectSection/>
     </main>
   );
 }
