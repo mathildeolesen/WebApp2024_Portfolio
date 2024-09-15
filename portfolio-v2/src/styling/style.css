@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+h1 { font-size: 2em; font-weight: 500; }
+
+body {
+    background-color: #ffff;
+    max-width: 1280px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+}
+
+#welcome {
+    background-color: #ffff;
+    display: flex;
+    max-width: 860px;
+    margin: 2em auto;
+    padding: 2em;
+    gap: 2em;
+
+    border-radius: 18px;
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+
+    figure {
+        border-radius: 100px;
+        width: 180px;
+        height: 100%;
+        margin: 0;
+        
+        img {
+            height: 180px;
+            border-radius: 100px;
+        }
+    }
+
+    article {
+        p {
+            font-size: 1.3em;
+        }
+
+        
+        /*width: 83%;*/
+
+    }
+}
+
+#display {
+    background-color: #ffff;
+    display: flex;
+    flex-direction: column;
+    /*background-color: rgb(253, 186, 186);*/
+    gap: 2em;
+    margin: 0 auto;
+    max-width: 860px;
+    align-items: center;
+    padding: 1.3em 0;
+
+    border-radius: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+
+    #displayHeader {
+        display: flex;
+        width: 83%;
+        justify-content: space-between;
+        h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            text-align: left;
+            margin: 0;
+        }
+    }
+    
+
+    #projectsContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 2em; /* Same gap as for #display */
+        width: 100%; /* Ensure the container uses full width */
+    }
+
+    button {
+        height: 40px;
+        padding: 0 0.5em;
+        background-color: #f5f5f5;
+        border-radius: 6px;
+        font-size: 1.3em;
+            
+        color: black;
+        font-weight: 500;
+        border: 1px solid #D2D2D2;
+
+        cursor: pointer;
+        outline: inherit;
+    }
+}
+
+#projectFormContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(245, 245, 245, 1); 
+    z-index: 1000; /* Sørg for at den ligger over andre elementer */
+
+    display: none; /* flex; when toggled */
+    flex-direction: column; 
+
+    gap: 2em;
+    margin: 0 auto;
+    max-width: 860px;
+    align-items: center;
+    padding: 1.3em 0;
+
+    border-radius: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06); /* Subtle shadow */
+    
+    #formHeader {
+        display: flex;
+        width: 83%;
+        justify-content: space-between;
+
+        h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            text-align: left;
+             margin: 0 auto;
+        }
+    }
+
+    #projectForm {
+        margin: 0 auto;
+        width: 83%;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        gap: 2em;
+        padding: 1.3em 0;
+        justify-content: center;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: calc(50% - 1em);
+            box-sizing: border-box; /* Include padding and border in element's total width */
+
+            label {
+                font-size: 1.3em;
+                font-weight: 600;
+            }
+
+            input[type=text] {
+                height: 40px;
+                border-radius: 6px;
+                border: 1px solid #D2D2D2;
+            }
+        }
+
+        button[type=submit] {
+            height: 40px;
+            padding: 0 2em;
+            background-color: #1A83FF;
+            border-radius: 6px;
+            font-size: 1.3em;
+            
+            color: white;
+            font-weight: 600;
+            border: 1px solid #D2D2D2;
+
+            cursor: pointer;
+	        outline: inherit;
+        }
+    }
+}
+
+
+
+.displayCard {
+    width: 83%;
+    display: flex;
+    background-color: #F5F5F5;
+    border-radius: 18px;
+    margin: 0 auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+    figure {
+        width: 180px;
+        margin: 8px;
+        border-radius: 18px;
+        
+        img {
+            width: 180px;
+            height: 100%;
+            border-radius: 18px;
+
+            /* If alt-text is visible and not image */
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    #displayCardInfo {
+        width: 72%; 
+        /* 83% of 860 (max width #display) = 713.8 
+        -> 713.8 - 180+8+8 = 513.8 (total space - figure/image width + l/r margins = available space) 
+        -> 513.8 of 713.8 = 72% (available space for displayCardInfo) */
+        
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+        margin-right: 10px;
+
+        h3 {
+            font-size: 1.3em;
+        }
+
+        #tags {
+            display: flex;
+
+            #hashtag {
+                height: 20px;
+                color: black;
+                background-color: #D9D9D9;
+                content: "#";
+                padding: 0px 4px;
+            }
+            
+            ul {
+                width: inherit;
+                display: flex;
+                flex-wrap: wrap;
+                list-style: none;
+                color: #1A83FF;
+                margin: 0;
+                padding: 0;
+    
+                li {
+                    padding-left: 12px;
+                }
+
+    
+                li:not(:last-child)::after {
+                    padding-left: 12px;
+                    content: "|";
+                    color: #D9D9D9;
+                }
+
+            }
+        }
+    }
+    
+}
+
