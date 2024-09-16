@@ -2,8 +2,17 @@ import { useState } from "react";
 import AddProjectForm from "./AddProjectForm";
 import ProjectCard from "./ProjectCard";
 
+type Project = {
+
+  id: string, // UUID er en streng
+  title: string,
+  tags: string[],
+  description: string
+}
+
 export default function ProjectSection() {
 
+    const [projects, setProjects] = useState<Project[]>([]);
     const [showForm, setShowForm] = useState(false);
 
     const toggleForm = () => {
@@ -18,9 +27,12 @@ export default function ProjectSection() {
           <button id="showFormButton" onClick={toggleForm}>Legg til prosjekt</button>
         </div>
         <div id="projectsContainer">
-        <ProjectCard/>
+        {projects.map((project, index) => (
+                    <ProjectCard key={index} project={project}/>
+                ))}
+        
         </div>
-        {showForm && <AddProjectForm toggleForm={toggleForm}/>}
+        {showForm && <AddProjectForm setProjects={setProjects} toggleForm={toggleForm}/>}
         {/* If showForm is true, render component */}
       </section>
     )

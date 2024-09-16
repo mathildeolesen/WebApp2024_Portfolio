@@ -17,8 +17,8 @@ export default function ExperienceSection({ experiences }: ExperiencesProps) {
                 <h2>Erfaringer</h2>
             </div>
             <div id="projectsContainer">
-                {experiences.map((experience) => (
-                    <Experience experience={experience}/>
+                {experiences.map((experience, index) => (
+                    <Experience key={index} experience={experience}/>
                 ))}
             </div>
         </section>
