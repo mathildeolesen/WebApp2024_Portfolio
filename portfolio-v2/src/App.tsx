@@ -4,9 +4,19 @@ import WelcomeCard from "./components/WelcomeCard";
 import './styling/style.css';
 
 function App() {
+
+  const dummyStudent = 
+    { 
+      firstName: "Mathilde",
+      lastName: "Olesen",
+      degree: "Bachelor i Informatikk",
+      degreeFinished: 2025,
+      email: "mathildeolesen@gmial.com"
+    }
+
   return (
     <main>
-      <WelcomeCard/>
+      <WelcomeCard student={dummyStudent}/>
       <ProjectSection/>
       <ExperienceSection/>
     </main>
