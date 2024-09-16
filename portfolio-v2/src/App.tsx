@@ -1,3 +1,4 @@
+import ExperienceSection from "./components/ExperienceSection";
 import ProjectSection from "./components/ProjectSection";
 import WelcomeCard from "./components/WelcomeCard";
 import './styling/style.css';
@@ -7,6 +8,7 @@ function App() {
     <main>
       <WelcomeCard/>
       <ProjectSection/>
+      <ExperienceSection/>
     </main>
   );
 }
