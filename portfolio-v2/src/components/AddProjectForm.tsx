@@ -20,6 +20,63 @@ export default function AddProjectForm(props: ProjectFormProps) {
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  const [title, setTitle] = useState("");
+  const [tags, setTags] = useState<string[]>([]);
+  const [description, setDescription] = useState("");
+
+  // toggleForm wouldnt trigger properly when inside addProject.
+  // If toggleForm was placed inside addProject, even at last, setProjects wouldnt work. No new project.
+  useEffect(() => {
+    if (formSubmitted) {
+      toggleForm();
+      setFormSubmitted(false);
+    }
+  }, [formSubmitted, toggleForm])
+
+  const updateTitle = (event: FormEvent<HTMLInputElement>) => {
+    const input = event.target as HTMLInputElement | null;
+    if (!input) return;
+    setTitle(input.value)
+  };
+
+  const updateTags = (event: FormEvent<HTMLInputElement>) => {
+    const input = event.target as HTMLInputElement | null;
+    if (!input) return;
+
+    const tags = (input.value).toString().split(",").map(tag => tag.trim());
+    setTags(tags)
+  };
+
+  const updateDescription = (event: FormEvent<HTMLInputElement>) => {
+    const input = event.target as HTMLInputElement | null;
+    if (!input) return;
+    setDescription(input.value)
+  };
+
+
+  const addProject = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!title) return;
+
+    const form = event.target as HTMLFormElement | null;
+
+    if (!form) return;
+
+    setProjects((prevProjects) => [
+      ...prevProjects, 
+      {id: crypto.randomUUID(), title, tags, description}
+    ])
+
+    setTitle("");
+    setTags([]);
+    setDescription("");
+
+    setFormSubmitted(true);
+  };
+
+  // Form-handling with FormData and formdata.get() -> ! Old !
+  /* 
   const addProject = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -47,17 +104,8 @@ export default function AddProjectForm(props: ProjectFormProps) {
     form.reset();
 
     setFormSubmitted(true);
-
   }
-
-  // toggleForm wouldnt trigger properly when inside addProject.
-  // If toggleForm was placed inside addProject, even at last, setProjects wouldnt work. No new project.
-  useEffect(() => {
-    if (formSubmitted) {
-      toggleForm();
-      setFormSubmitted(false);
-    }
-  }, [formSubmitted, toggleForm])
+    */
 
 
     return (
@@ -69,15 +117,18 @@ export default function AddProjectForm(props: ProjectFormProps) {
           <form id="projectForm" onSubmit={addProject}>
             <div id="title">
               <label htmlFor="title">Tittel</label>
-              <input type="text" id="title" name="title" required/>
+              <input type="text" id="title" name="title" 
+                onChange={updateTitle} value={title} required/>
             </div>
             <div id="tags">
               <label htmlFor="tags">Tags</label>
-              <input type="text" id="tags" name="tags" required/>
+              <input type="text" id="tags" name="tags" 
+              onChange={updateTags} value={tags} required/>
             </div>
             <div id="description">
               <label htmlFor="description">Beskrivelse</label>
-              <input type="text" id="description" name="description" required/>
+              <input type="text" id="description" name="description" 
+              onChange={updateDescription} value={description} required/>
             </div>
             <div id="coverImage">
               <label htmlFor="coverImage">Bilde</label>
