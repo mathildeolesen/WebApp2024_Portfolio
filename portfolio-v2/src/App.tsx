@@ -1,3 +1,4 @@
+import Contact from "./components/Contact";
 import ExperienceSection from "./components/ExperienceSection";
 import ProjectSection from "./components/ProjectSection";
 import WelcomeCard from "./components/WelcomeCard";
@@ -30,6 +31,7 @@ function App() {
       <WelcomeCard student={dummyStudent}/>
       <ProjectSection/>
       <ExperienceSection experiences={dummyStudent.experiences}/>
+      <Contact email="test@ja.nei"/>
     </main>
   );
 }

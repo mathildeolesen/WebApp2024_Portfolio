@@ -59,6 +59,10 @@ export default function AddProjectForm(props: ProjectFormProps) {
 
     if (!title) return;
 
+    if (!tags) return;
+
+    if(!description) return;
+
     const form = event.target as HTMLFormElement | null;
 
     if (!form) return;
