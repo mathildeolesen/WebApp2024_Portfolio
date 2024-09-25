@@ -118,7 +118,7 @@ export default function AddProjectForm(props: ProjectFormProps) {
             <h2>Legg til nytt prosjekt</h2>
             <button id="cancelFormButton" onClick={toggleForm}>Avbryt</button>
           </div>
-          <form id="projectForm" onSubmit={addProject}>
+          <form className="form" id="projectForm" onSubmit={addProject}>
             <div id="title">
               <label htmlFor="title">Tittel</label>
               <input type="text" id="title" name="title" 

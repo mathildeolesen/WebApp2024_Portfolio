@@ -156,52 +156,63 @@ body {
              margin: 0 auto;
         }
     }
-    
+}
 
-    #projectForm {
-        margin: 0 auto;
-        width: 83%;
+.form {
+    margin: 0 auto;
+    width: 83%;
 
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 2em;
+    padding: 1.3em 0;
+    justify-content: center;
+
+    div {
         display: flex;
-        flex-wrap: wrap;
-        align-content: center;
-        gap: 2em;
-        padding: 1.3em 0;
-        justify-content: center;
+        flex-direction: column;
+        gap: 8px;
+        width: calc(50% - 1em);
+        box-sizing: border-box; /* Include padding and border in element's total width */
 
-        div {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            width: calc(50% - 1em);
-            box-sizing: border-box; /* Include padding and border in element's total width */
-
-            label {
-                font-size: 1.3em;
-                font-weight: 600;
-            }
-
-            input[type=text] {
-                height: 40px;
-                border-radius: 6px;
-                border: 1px solid #D2D2D2;
-            }
-        }
-
-        button[type=submit] {
-            height: 40px;
-            padding: 0 2em;
-            background-color: #1A83FF;
-            border-radius: 6px;
+        label {
             font-size: 1.3em;
-            
-            color: white;
             font-weight: 600;
-            border: 1px solid #D2D2D2;
-
-            cursor: pointer;
-	        outline: inherit;
         }
+
+        input[type=text] {
+            height: 40px;
+            border-radius: 6px;
+            border: 1px solid #D2D2D2;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            box-sizing: border-box;
+            padding: 12px 20px;
+
+            border-radius: 6px;
+            border: 1px solid #D2D2D2;
+            resize: vertical;
+    
+        }
+    }
+
+    button[type=submit] {
+        height: 40px;
+        padding: 0 2em;
+        background-color: #1A83FF;
+        border-radius: 6px;
+        font-size: 1.3em;
+        
+        color: white;
+        font-weight: 600;
+        border: 1px solid #D2D2D2;
+
+        cursor: pointer;
+        outline: inherit;
     }
 }
 

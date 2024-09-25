@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 
 type ContactProps = {
@@ -76,8 +76,8 @@ export default function Contact(props: ContactProps) {
         setTopic(input.value);
     };
 
-    const updateMessage = (event: FormEvent<HTMLInputElement>) => {
-        const input = event.target as HTMLInputElement | null;
+    const updateMessage = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        const input = event.target as HTMLTextAreaElement | null;
         if (!input) return;
         setMessageIsDirty(true);
         setMessage(input.value);
@@ -110,7 +110,8 @@ export default function Contact(props: ContactProps) {
     };
 
     return (
-        <section>
+        <section id="display">
+            <div id="displayHeader">
             <h2>Ta kontakt!</h2>
             <pre>
                 {JSON.stringify(
@@ -119,8 +120,9 @@ export default function Contact(props: ContactProps) {
                     2
                 )}
             </pre>
+            </div>
 
-            <form id="contactForm" onSubmit={addProject}>
+            <form className="form" id="contactForm" onSubmit={addProject}>
                 <div id="senderName">
                     <label htmlFor="senderName">Navn</label>
                     <input type="text" id="senderName" name="senderName" 
@@ -154,7 +156,7 @@ export default function Contact(props: ContactProps) {
 
                 <div id="message">
                     <label htmlFor="message">Melding</label>
-                    <input type="textarea" id="message" name="message"
+                    <textarea id="message" name="message"
                     onChange={updateMessage}
                     onFocus={() => { setMessageIsTouched(true) }}
                     onBlur={() => { validateMessageInput(message) }}
@@ -169,3 +171,59 @@ export default function Contact(props: ContactProps) {
         </section>
     )
 }
+
+/*
+<section id="display">
+        <div id="displayHeader">
+          <h2>Prosjekter</h2>
+          <button id="showFormButton" onClick={toggleForm}>Legg til prosjekt</button>
+        </div>
+        <div id="projectsContainer">
+        {projects.length === 0 
+        ? (
+          <article className="displayCard">
+            <div id="displayCardInfo">
+              <h3>Ingen prosjekter 🥲</h3>
+            </div>
+          </article>
+        ) : (
+          projects.map((project, index) => (
+            <ProjectCard key={index} project={project} setProjects={setProjects}/>
+        ))
+        )}
+        
+        </div>
+        {showForm && <AddProjectForm setProjects={setProjects} toggleForm={toggleForm}/>}
+        /* If showForm is true, render component 
+      </section>
+
+
+      <article id="projectFormContainer">
+          <div id="formHeader">
+            <h2>Legg til nytt prosjekt</h2>
+            <button id="cancelFormButton" onClick={toggleForm}>Avbryt</button>
+          </div>
+          <form id="projectForm" onSubmit={addProject}>
+            <div id="title">
+              <label htmlFor="title">Tittel</label>
+              <input type="text" id="title" name="title" 
+                onChange={updateTitle} value={title} required/>
+            </div>
+            <div id="tags">
+              <label htmlFor="tags">Tags</label>
+              <input type="text" id="tags" name="tags" 
+              onChange={updateTags} value={tags} required/>
+            </div>
+            <div id="description">
+              <label htmlFor="description">Beskrivelse</label>
+              <input type="text" id="description" name="description" 
+              onChange={updateDescription} value={description} required/>
+            </div>
+            <div id="coverImage">
+              <label htmlFor="coverImage">Bilde</label>
+              <input type="file" id="coverImage" name="coverImage"/>
+            </div>
+            <button type="submit">Legg til</button>
+          </form>
+         </article>
+*/
