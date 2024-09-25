@@ -17,9 +17,18 @@ export default function ExperienceSection({ experiences }: ExperiencesProps) {
                 <h2>Erfaringer</h2>
             </div>
             <div id="projectsContainer">
-                {experiences.map((experience, index) => (
-                    <Experience key={index} experience={experience}/>
-                ))}
+                {experiences.length === 0 
+                ? (
+                    <article className="displayCard">
+                        <div id="displayCardInfo">
+                            <h3>Ingen erfaringer 🥲</h3>
+                        </div>
+                    </article>
+                ) : (
+                    experiences.map((experience, index) => (
+                        <Experience key={index} experience={experience}/>
+                    ))
+                )}
             </div>
         </section>
     )
