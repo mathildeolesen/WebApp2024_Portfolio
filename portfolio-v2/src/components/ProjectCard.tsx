@@ -9,10 +9,17 @@ type Project = {
 
 type ProjectCardProps = {
     project: Project;
+    setProjects: React.Dispatch<React.SetStateAction<Project[]>>
 }
 
 
-export default function ProjectCard({ project } : ProjectCardProps) {
+export default function ProjectCard(props : ProjectCardProps) {
+
+    const { project, setProjects } = props;
+
+    const removeProject = (id: string) => {
+        setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id));
+    };
 
     return (
         <article className="displayCard">
@@ -31,6 +38,9 @@ export default function ProjectCard({ project } : ProjectCardProps) {
                 </div>
                 <p>{project.description}</p>
             </div>
+            <button className="remove-button" onClick={() => removeProject(project.id)} type="button">
+                <div className="remove-icon">❌</div>
+            </button>
         </article>
     )
 }

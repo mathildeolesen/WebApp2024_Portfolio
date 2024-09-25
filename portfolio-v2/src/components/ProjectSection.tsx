@@ -36,7 +36,7 @@ export default function ProjectSection() {
           </article>
         ) : (
           projects.map((project, index) => (
-            <ProjectCard key={index} project={project}/>
+            <ProjectCard key={index} project={project} setProjects={setProjects}/>
         ))
         )}
         
