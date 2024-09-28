@@ -109,10 +109,15 @@ export default function Contact(props: ContactProps) {
         
     };
 
+    const showEmail = () => {
+        alert(email)
+    }
+
     return (
         <section id="display">
             <div id="displayHeader">
             <h2>Ta kontakt!</h2>
+            <button type="button" onClick={showEmail}>E-post</button>
             <pre>
                 {JSON.stringify(
                     { senderName, senderEmail, topic, message },

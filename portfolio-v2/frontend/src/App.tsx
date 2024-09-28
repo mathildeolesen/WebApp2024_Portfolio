@@ -31,7 +31,7 @@ function App() {
       <WelcomeCard student={dummyStudent}/>
       <ProjectSection/>
       <ExperienceSection experiences={dummyStudent.experiences}/>
-      <Contact email="test@ja.nei"/>
+      <Contact email="mathildeolesen@gmail.com"/>
     </main>
   );
 }
