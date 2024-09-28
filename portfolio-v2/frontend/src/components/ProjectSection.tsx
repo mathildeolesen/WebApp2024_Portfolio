@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddProjectForm from "./AddProjectForm";
 import ProjectCard from "./ProjectCard";
+import { ofetch } from "ofetch";
 
 type Project = {
 
@@ -19,12 +20,25 @@ export default function ProjectSection() {
         setShowForm(!showForm);
     }
 
+    const initializeData = () => {
+      ofetch("http://localhost:3000/projects").then(
+        (projects: { data: Project[]}) => {
+          
+          setProjects(projects.data || []);
+      })
+    };
+
+    useEffect(() => {
+      initializeData();
+    }, [])
+
+
     const countTags = (): Map<string, number> => {
       const tagCounts = new Map<string, number>();
   
       projects.forEach((project) => {
         project.tags.forEach((tag) => {
-          tagCounts.set(tag.toLowerCase(), (tagCounts.get(tag.toLowerCase()) || 0) + 1);
+          tagCounts.set(tag, (tagCounts.get(tag.toLowerCase()) || 0) + 1);
         });
       });
   
