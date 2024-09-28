@@ -19,6 +19,20 @@ export default function ProjectSection() {
         setShowForm(!showForm);
     }
 
+    const countTags = (): Map<string, number> => {
+      const tagCounts = new Map<string, number>();
+  
+      projects.forEach((project) => {
+        project.tags.forEach((tag) => {
+          tagCounts.set(tag.toLowerCase(), (tagCounts.get(tag.toLowerCase()) || 0) + 1);
+        });
+      });
+  
+      return tagCounts;
+    };
+    
+    const tagCounts = countTags();
+
     return (
 
         <section id="display">
@@ -27,6 +41,16 @@ export default function ProjectSection() {
           <button id="showFormButton" onClick={toggleForm}>Legg til prosjekt</button>
         </div>
         <div id="projectsContainer">
+          <div id="tagCount">
+            <p>Antall prosjekter per tag:</p>
+            <div id="countedTags">
+              {Array.from(tagCounts.entries()).map(([tag, count]) => (
+              <p key={tag}>
+                {tag.charAt(0).toUpperCase() + tag.slice(1)}: {count}
+              </p>
+            ))}
+            </div>
+          </div>
         {projects.length === 0 
         ? (
           <article className="displayCard">

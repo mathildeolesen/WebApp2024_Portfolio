@@ -293,10 +293,18 @@ body {
                 }
 
             }
-        }
-
-       
+        } 
     }
     
+}
+
+#tagCount {
+    width: 83%;
+    margin: 0 auto;
+
+    #countedTags {
+        display: flex;
+        justify-content: space-evenly;
+    }
 }
 
