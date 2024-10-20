@@ -6,8 +6,7 @@ type Status = "idle" | "loading" | "error" | "success" | "fetching";
 
 export function useProjects() {
   const [status, setStatus] = useState<Status>("idle");
-  const [data, setData] = useState<{ projects:
-    Project[]}>({ projects: [] });
+  const [data, setData] = useState<{ projects: Project[] } >({ projects: [] });
   const [error, setError] = useState<string | null>(null);
 
   // Computed verdier basert på status
@@ -31,7 +30,7 @@ export function useProjects() {
     try {
       setStatus("loading");
       const response = await projectsApi.fetchProjects();
-      setData({ projects: response.data }); // Setter prosjektene i state
+      setData({ projects: response }); // Setter prosjektene i state
       setStatus("success");
     } catch (error) {
       setStatus("error");
@@ -46,11 +45,12 @@ export function useProjects() {
   }, [fetchData]);
 
   // Funksjon for å legge til et prosjekt
-  const add = async (data: Pick<Project, "title" | "tags" | "description">) => {
+  const add = async (data: Partial<Project>) => {
+    const { title = "", tags = [], description = "" } = data;
     
     try {
         setStatus("loading");
-        await projectsApi.create(data);
+        await projectsApi.create({ title, tags, description});
         await fetchData();
         setStatus("success")
     } catch (error) {

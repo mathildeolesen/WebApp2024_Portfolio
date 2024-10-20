@@ -2,11 +2,30 @@ import { useState } from "react";
 import AddProjectForm from "./AddProjectForm";
 import ProjectCard from "./ProjectCard";
 import useProjects from "@/features/projects/hooks/useProjects"; // Bruker useProjects-hook
+import { Action, Project } from "@/types";
 
 export default function ProjectSection() {
-  const { status, get, data, error } = useProjects();
+  const { add, remove, status, get, data, error } = useProjects();
   const { projects } = data; // Destrukturerer prosjektene fra data
   const [showForm, setShowForm] = useState(false);
+
+  const handleProjectMutation = (action: Action, data: Partial<Project>) => {
+    const { id, ...project } = data;
+  
+    switch (action) {
+      case "add":
+        add(project); // Project vil være delvis, men inneholder de nødvendige feltene for `add`
+        break;
+      case "remove":
+        if (id) {
+          remove(id);
+        }
+        break;
+      default:
+        break;
+    }
+  };
+  
 
   const toggleForm = () => {
     setShowForm(!showForm);
@@ -53,12 +72,12 @@ export default function ProjectSection() {
         </article>
       ) : (
         projects.map((project, index) => (
-          <ProjectCard key={index} project={project} setProjects={setProjects}/>
+          <ProjectCard key={index} project={project} handleProjectMutation={handleProjectMutation}/>
       ))
       )}
       
       </div>
-      {showForm && <AddProjectForm setProjects={setProjects} toggleForm={toggleForm}/>}
+      {showForm && <AddProjectForm handleProjectMutation={handleProjectMutation} toggleForm={toggleForm}/>}
       {/* If showForm is true, render component */}
     </section>
   )

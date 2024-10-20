@@ -1,3 +1,4 @@
+import { Action } from "@/types";
 
 type Project = {
 
@@ -9,17 +10,18 @@ type Project = {
 
 type ProjectCardProps = {
     project: Project;
-    setProjects: React.Dispatch<React.SetStateAction<Project[]>>
+    //setProjects: React.Dispatch<React.SetStateAction<Project[]>>
+    handleProjectMutation: (action: Action, habit: Partial<Project>) => void;
 }
 
 
 export default function ProjectCard(props : ProjectCardProps) {
 
-    const { project, setProjects } = props;
+    const { project, handleProjectMutation } = props;
 
     const removeProject = (id: string) => {
-        setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id));
-    };
+        handleProjectMutation("remove", { id });
+      };
 
     return (
         <article className="displayCard">
