@@ -30,7 +30,7 @@ const remove = async (id: string) => {
 };
 
 // Vi sier vi sender med "title", "tags" og description
-const create = async (data: Pick<Project, "title" | "tags" | "description">) => {
+const create = async (data: Pick<Project, "title" | "tags" | "description" | "createdAt">) => {
   try {
     const createdProject = await ofetch(url, {
       method: "POST",

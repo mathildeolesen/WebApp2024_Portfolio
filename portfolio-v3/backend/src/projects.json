@@ -9,7 +9,8 @@
       "Node",
       "API"
     ],
-    "description": "Dette er prosjekt hvor det lages en webapplikasjon men en frontend og backend."
+    "description": "Dette er prosjekt hvor det lages en webapplikasjon men en frontend og backend.",
+    "createdAt": "2024-10-20T12:00:00Z"
   },
   {
     "id": "eeec83a6-2734-4ca3-a0ba-1a66f18b0ee9",
@@ -19,7 +20,8 @@
       "C#",
       "Gruppeprosjekt"
     ],
-    "description": "Dette er et simuleringsprosjekt som har tatt i bruk .NET og C#."
+    "description": "Dette er et simuleringsprosjekt som har tatt i bruk .NET og C#.",
+    "createdAt": "2024-10-20T12:00:00Z"
   },
   {
     "id": "84e99773-1a2a-4b20-922c-97becb444756",
@@ -29,7 +31,8 @@
       "Vue",
       "Gruppeprosjekt"
     ],
-    "description": "Dette er et prosjekt som har laget en nettside med Java som backend og Vue som frontend."
+    "description": "Dette er et prosjekt som har laget en nettside med Java som backend og Vue som frontend.",
+    "createdAt": "2024-10-20T12:00:00Z"
   },
   {
     "id": "68c9d5a1-e4a2-44f2-a905-75b9e400a95a",
@@ -40,6 +43,16 @@
       "Jetpack Compose",
       "Gruppeprosjekt"
     ],
-    "description": "Dette er et prosjekt hvor det ble laget en android-applikasjon med Kotlin og Jetpack Compose."
+    "description": "Dette er et prosjekt hvor det ble laget en android-applikasjon med Kotlin og Jetpack Compose.",
+    "createdAt": "2024-10-20T12:00:00Z"
+  },
+  {
+    "id": "adffb841-c159-4b83-8412-efdb531002cc",
+    "title": "fwf",
+    "tags": [
+      "wfwf"
+    ],
+    "description": "fwf",
+    "createdAt": "2024-10-17T00:00:00.000Z"
   }
 ]

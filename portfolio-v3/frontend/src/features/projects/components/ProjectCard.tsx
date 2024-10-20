@@ -1,12 +1,17 @@
-import { Action } from "@/types";
+import { formatDistance } from "@/helpers/format";
+import { Action, Project } from "@/types";
+import { format } from "date-fns";
 
+/*
 type Project = {
 
     id: string, // UUID er en streng
     title: string,
     tags: string[],
-    description: string
+    description: string,
+    createdAt: Date,
   }
+    */
 
 type ProjectCardProps = {
     project: Project;
@@ -19,6 +24,9 @@ export default function ProjectCard(props : ProjectCardProps) {
 
     const { project, handleProjectMutation } = props;
 
+    //const formattedCreatedAt = formatDistance(new Date(project.createdAt))
+    const formattedStartDate = format(new Date(project.createdAt), 'dd. MMMM yyyy');
+
     const removeProject = (id: string) => {
         handleProjectMutation("remove", { id });
       };
@@ -30,6 +38,7 @@ export default function ProjectCard(props : ProjectCardProps) {
             </figure>
             <div id="displayCardInfo">
                 <h3>{project.title}</h3>
+                <p>{formattedStartDate}</p>
                 <div id="tags">
                     <span id="hashtag">#</span>
                     <ul id="tags">
@@ -37,6 +46,7 @@ export default function ProjectCard(props : ProjectCardProps) {
                             <li key={tag}>{tag}</li>
                             ))}
                     </ul>
+                    
                 </div>
                 <p>{project.description}</p>
             </div>

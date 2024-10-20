@@ -46,11 +46,11 @@ export function useProjects() {
 
   // Funksjon for å legge til et prosjekt
   const add = async (data: Partial<Project>) => {
-    const { title = "", tags = [], description = "" } = data;
+    const { title = "", tags = [], description = "", createdAt = "" } = data;
     
     try {
         setStatus("loading");
-        await projectsApi.create({ title, tags, description});
+        await projectsApi.create({ title, tags, description, createdAt});
         await fetchData();
         setStatus("success")
     } catch (error) {

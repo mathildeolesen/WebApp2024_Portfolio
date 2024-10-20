@@ -1,12 +1,5 @@
-import { Action } from "@/types";
+import { Action, Project } from "@/types";
 import { useState, FormEvent, useEffect } from "react";
-
-type Project = {
-  id: string; // UUID er en streng
-  title: string;
-  tags: string[];
-  description: string;
-};
 
 type ProjectFormProps = {
   toggleForm: () => void;
@@ -20,6 +13,7 @@ export default function AddProjectForm(props: ProjectFormProps) {
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [description, setDescription] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
 
   useEffect(() => {
     if (formSubmitted) {
@@ -44,19 +38,26 @@ export default function AddProjectForm(props: ProjectFormProps) {
     setDescription(input.value);
   };
 
+  const updateCreatedAt = (event: FormEvent<HTMLInputElement>) => {
+    const input = event.target as HTMLInputElement;
+    const date = new Date(input.value)
+    setCreatedAt(date.toISOString())
+  }
+
   const addProject = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // Sjekk at alle feltene er fylt ut
-    if (!title || !tags.length || !description) return;
+    if (!title || !tags.length || !description || !createdAt ) return;
 
     // Kall til handleProjectMutation
-    handleProjectMutation("add", { title, tags, description });
+    handleProjectMutation("add", { title, tags, description, createdAt });
 
     // Reset formfeltene
     setTitle("");
     setTags([]);
     setDescription("");
+    setCreatedAt("");
 
     // Sett formSubmitted til true for å trigge toggleForm
     setFormSubmitted(true);
@@ -80,6 +81,10 @@ export default function AddProjectForm(props: ProjectFormProps) {
         <div id="description">
           <label htmlFor="description">Beskrivelse</label>
           <input type="text" id="description" name="description" onChange={updateDescription} value={description} required />
+        </div>
+        <div id="createdAt">
+          <label htmlFor="createdAt">Dato</label>
+          <input type="date" id="createdAt" name="createdAt" onChange={updateCreatedAt} value={createdAt.substring(0, 10)} required />
         </div>
         <div id="coverImage">
           <label htmlFor="coverImage">Bilde</label>
