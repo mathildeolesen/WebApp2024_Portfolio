@@ -12,8 +12,10 @@ export default function AddProjectForm(props: ProjectFormProps) {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState<string[]>([]);
+  const [currentTag, setCurrentTag] = useState("");
   const [description, setDescription] = useState("");
   const [createdAt, setCreatedAt] = useState("");
+  const [tagsWarning, setTagsWarning] = useState(false);
 
   useEffect(() => {
     if (formSubmitted) {
@@ -27,10 +29,18 @@ export default function AddProjectForm(props: ProjectFormProps) {
     setTitle(input.value);
   };
 
-  const updateTags = (event: FormEvent<HTMLInputElement>) => {
+  const updateCurrentTag = (event: FormEvent<HTMLInputElement>) => {
     const input = event.target as HTMLInputElement;
-    const tagsArray = input.value.split(",").map(tag => tag.trim());
-    setTags(tagsArray);
+    setCurrentTag(input.value);
+    if (tagsWarning) setTagsWarning(false);
+  };
+
+  const handleKeyDownTag = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && currentTag.trim()) {
+      setTags((prevTags) => [...prevTags, currentTag.trim()]);
+      setCurrentTag("");
+      event.preventDefault();
+    }
   };
 
   const updateDescription = (event: FormEvent<HTMLInputElement>) => {
@@ -40,26 +50,24 @@ export default function AddProjectForm(props: ProjectFormProps) {
 
   const updateCreatedAt = (event: FormEvent<HTMLInputElement>) => {
     const input = event.target as HTMLInputElement;
-    const date = new Date(input.value)
-    setCreatedAt(date.toISOString())
-  }
+    const date = new Date(input.value);
+    setCreatedAt(date.toISOString());
+  };
 
   const addProject = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!title || !description || !createdAt) return;
+    if (tags.length === 0) {
+      setTagsWarning(true);
+      return;
+    }
 
-    // Sjekk at alle feltene er fylt ut
-    if (!title || !tags.length || !description || !createdAt ) return;
-
-    // Kall til handleProjectMutation
     handleProjectMutation("add", { title, tags, description, createdAt });
 
-    // Reset formfeltene
     setTitle("");
     setTags([]);
     setDescription("");
     setCreatedAt("");
-
-    // Sett formSubmitted til true for å trigge toggleForm
     setFormSubmitted(true);
   };
 
@@ -75,8 +83,19 @@ export default function AddProjectForm(props: ProjectFormProps) {
           <input type="text" id="title" name="title" onChange={updateTitle} value={title} required />
         </div>
         <div id="tags">
-          <label htmlFor="tags">Tags</label>
-          <input type="text" id="tags" name="tags" onChange={updateTags} value={tags.join(", ")} required />
+          <label htmlFor="tags">Tags (trykk Enter for å legge til)</label>
+          <input type="text" id="tags" name="tags" onChange={updateCurrentTag} onKeyDown={handleKeyDownTag} value={currentTag}/>
+          {tagsWarning && <p className="warning">Vennligst legg til minst én tag.</p>}
+          <div id="tagList">
+            {tags.map((tag, index) => (
+              <span key={index} className="tag">
+                {tag}
+                <button type="button" onClick={() => setTags(tags.filter((_, i) => i !== index))}>
+                  <div className="remove-icon">❌</div>
+                </button>
+              </span>
+            ))}
+          </div>
         </div>
         <div id="description">
           <label htmlFor="description">Beskrivelse</label>
@@ -92,6 +111,9 @@ export default function AddProjectForm(props: ProjectFormProps) {
         </div>
         <button type="submit">Legg til</button>
       </form>
+      <style>
+        {}
+      </style>
     </article>
   );
 }
