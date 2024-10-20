@@ -1,6 +1,7 @@
 import Contact from "./components/Contact";
-import ExperienceSection from "./components/ExperienceSection";
-import ProjectSection from "./components/ProjectSection";
+import ExperienceSection from "./features/experiences/pages/ExperienceSection";
+import Layout from "./components/Layout";
+import ProjectSection from "./features/projects/pages/ProjectSection";
 import WelcomeCard from "./components/WelcomeCard";
 import './styling/style.css';
 
@@ -27,12 +28,12 @@ function App() {
     }
 
   return (
-    <main>
+    <Layout>
       <WelcomeCard student={dummyStudent}/>
       <ProjectSection/>
       <ExperienceSection experiences={dummyStudent.experiences}/>
       <Contact email="mathildeolesen@gmail.com"/>
-    </main>
+    </Layout>
   );
 }
 

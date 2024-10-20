@@ -1,6 +1,6 @@
 import { useState } from "react";
-import AddProjectForm from "./AddProjectForm";
-import ProjectCard from "./ProjectCard";
+import AddProjectForm from "@/features/projects/components/AddProjectForm";
+import ProjectCard from "@/features/projects/components/ProjectCard";
 import useProjects from "@/features/projects/hooks/useProjects"; // Bruker useProjects-hook
 import { Action, Project } from "@/types";
 
