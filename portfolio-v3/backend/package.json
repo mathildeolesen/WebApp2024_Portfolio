@@ -5,8 +5,11 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.13.1",
+    "@prisma/client": "^5.21.1",
     "date-fns": "^4.1.0",
-    "hono": "^4.6.3"
+    "hono": "^4.6.3",
+    "prisma": "^5.21.1",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
