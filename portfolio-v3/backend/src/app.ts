@@ -1,59 +1,71 @@
-import { readFile, writeFile } from "fs/promises";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { Project } from "./types/types";
+import { prisma } from "./prisma";
 
 const app = new Hono();
 
 app.use("/*", cors());
 
-app.get('/v1/projects', async (c) => { 
-    const data = await readFile("src/projects.json", 'utf-8');
-    return c.json(JSON.parse(data))
+// Hent alle prosjekter
+app.get('/v1/projects', async (c) => {
+    const projects = await prisma.project.findMany();
+    
+    // Konverterer tags til array
+    const parsedProjects = projects.map(project => ({
+        ...project,
+        tags: project.tags.split(','), // Del opp tags-strengen til en array
+    }));
+
+    return c.json(parsedProjects);
 });
 
+// Slett et prosjekt ved ID
 app.delete('/v1/projects/:id', async (c) => {
     const id = c.req.param("id");
     console.log("Received ID for deletion:", id);
 
-    const data = await readFile("src/projects.json", 'utf-8');
-    const projects: Project[] = JSON.parse(data);
+    try {
+        // Sjekk om prosjektet eksisterer
+        const project = await prisma.project.findUnique({
+            where: { id }
+        });
 
-    const projectIndex = projects.findIndex(project => project.id === id);
+        if (!project) {
+            return c.json({ message: "Project not found" }, 404); 
+        }
 
-    if (projectIndex === -1) {
-        // Returner en 404 hvis prosjektet ikke ble funnet
-        return c.json({ message: "Project not found" }, 404); 
+        // Slett prosjektet fra databasen
+        await prisma.project.delete({
+            where: { id }
+        });
+
+        // Returner 204 No Content som bekreftelse på slettingen
+        return c.json(undefined, 204);
+    } catch (error) {
+        console.error("Failed to delete project:", error);
+        return c.json({ message: "Internal Server Error" }, 500);
     }
-
-    // Opprett en ny liste uten prosjektet som skal slettes
-    const updatedProjects = projects.filter((project: Project) => project.id !== id);
-    await writeFile("src/projects.json", JSON.stringify(updatedProjects, null, 2));
-
-    // Returner 204 No Content som bekreftelse på slettingen
-    return c.json(undefined, 204);
 });
 
-
+// Legg til et nytt prosjekt
 app.post('/v1/projects', async (c) => {
     try {
-        // Les request-body som JSON
         const newProject = await c.req.json();
         console.log("New Project:", newProject);
 
-        const fileProjects = await readFile("src/projects.json", 'utf-8');
-        const objectProjects = JSON.parse(fileProjects);
-    
-        const createdProject = { id: crypto.randomUUID(), ...newProject };
-    
-        objectProjects.push(createdProject);
-
-        await writeFile("src/projects.json", JSON.stringify(objectProjects, null, 2));
-        console.log("Successfully written to file");
+        // Lag et nytt prosjekt i databasen
+        const createdProject = await prisma.project.create({
+            data: {
+                title: newProject.title,
+                tags: newProject.tags, // Vet at frontend sender en komma-separert string
+                description: newProject.description,
+                createdAt: newProject.createdAt, // Sett createdAt til nåværende tid
+            },
+        });
 
         return c.json(createdProject, 201);
     } catch (error) {
-        console.error("Unknown error:", error);
+        console.error("Error creating project:", error);
         return c.json({ message: "Internal Server Error: An unknown error occurred." }, 500);
     }
 });

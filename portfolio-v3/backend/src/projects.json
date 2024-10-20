@@ -31,7 +31,7 @@
       "Vue",
       "Gruppeprosjekt"
     ],
-    "description": "Dette er et prosjekt som har laget en nettside med Java som backend og Vue som frontend.",
+    "description": "Dette er et prosjekt som omhandlet å lage en nettside med Java som backend og Vue som frontend.",
     "createdAt": "2024-10-20T12:00:00Z"
   },
   {
@@ -45,14 +45,5 @@
     ],
     "description": "Dette er et prosjekt hvor det ble laget en android-applikasjon med Kotlin og Jetpack Compose.",
     "createdAt": "2024-10-20T12:00:00Z"
-  },
-  {
-    "id": "adffb841-c159-4b83-8412-efdb531002cc",
-    "title": "fwf",
-    "tags": [
-      "wfwf"
-    ],
-    "description": "fwf",
-    "createdAt": "2024-10-17T00:00:00.000Z"
   }
 ]
