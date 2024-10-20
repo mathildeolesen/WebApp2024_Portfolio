@@ -1,29 +1,45 @@
-
-{
-	"data": [
-		{
-			"id": "a691e669-0784-44fe-87bf-2d44d80b694a",
-			"title": "Prosjekt 1",
-			"tags": ["React", "TypeScript", "JavaScript", "Node", "API"],
-            "description": "Dette er prosjekt hvor det lages en webapplikasjon men en frontend og backend."
-		},
-		{
-			"id": "eeec83a6-2734-4ca3-a0ba-1a66f18b0ee9",
-			"title": "Prosjekt 2",
-			"tags": [".NET", "C#", "Gruppeprosjekt"],
-            "description": "Dette er et simuleringsprosjekt som har tatt i bruk .NET og C#."
-		},
-		{
-			"id": "84e99773-1a2a-4b20-922c-97becb444756",
-			"title": "Prosjekt 3",
-			"tags": ["Java", "Vue", "Gruppeprosjekt"],
-            "description": "Dette er et prosjekt som har laget en nettside med Java som backend og Vue som frontend."
-		},
-		{
-			"id": "68c9d5a1-e4a2-44f2-a905-75b9e400a95a",
-			"title": "Prosjekt 4",
-			"tags": ["Mobilprogrammering", "Kotlin", "Jetpack Compose", "Gruppeprosjekt"],
-            "description": "Dette er et prosjekt hvor det ble laget en android-applikasjon med Kotlin og Jetpack Compose."
-		}
-	]
-}
+[
+  {
+    "id": "a691e669-0784-44fe-87bf-2d44d80b694a",
+    "title": "Prosjekt 1",
+    "tags": [
+      "React",
+      "TypeScript",
+      "JavaScript",
+      "Node",
+      "API"
+    ],
+    "description": "Dette er prosjekt hvor det lages en webapplikasjon men en frontend og backend."
+  },
+  {
+    "id": "eeec83a6-2734-4ca3-a0ba-1a66f18b0ee9",
+    "title": "Prosjekt 2",
+    "tags": [
+      ".NET",
+      "C#",
+      "Gruppeprosjekt"
+    ],
+    "description": "Dette er et simuleringsprosjekt som har tatt i bruk .NET og C#."
+  },
+  {
+    "id": "84e99773-1a2a-4b20-922c-97becb444756",
+    "title": "Prosjekt 3",
+    "tags": [
+      "Java",
+      "Vue",
+      "Gruppeprosjekt"
+    ],
+    "description": "Dette er et prosjekt som har laget en nettside med Java som backend og Vue som frontend."
+  },
+  {
+    "id": "68c9d5a1-e4a2-44f2-a905-75b9e400a95a",
+    "title": "Prosjekt 4",
+    "tags": [
+      "Mobilprogrammering",
+      "Kotlin",
+      "Jetpack Compose",
+      "Gruppeprosjekt"
+    ],
+    "description": "Dette er et prosjekt hvor det ble laget en android-applikasjon med Kotlin og Jetpack Compose."
+  }
+]

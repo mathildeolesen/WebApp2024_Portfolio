@@ -14,34 +14,49 @@ app.get('/v1/projects', async (c) => {
 
 app.delete('/v1/projects/:id', async (c) => {
     const id = c.req.param("id");
+    console.log("Received ID for deletion:", id);
+
     const data = await readFile("src/projects.json", 'utf-8');
-    const projects: Project[]= JSON.parse(data)
+    const projects: Project[] = JSON.parse(data);
 
-    const projectIndex = projects.findIndex(project => project.id === id)
+    const projectIndex = projects.findIndex(project => project.id === id);
 
-    // Hvis prosjektet med id ikke finnes
     if (projectIndex === -1) {
-        return c.json(undefined, 404);
-    };
+        // Returner en 404 hvis prosjektet ikke ble funnet
+        return c.json({ message: "Project not found" }, 404); 
+    }
 
-    // Fjerner / Filtrerer ut prosjektet med id som skal slettes
+    // Opprett en ny liste uten prosjektet som skal slettes
     const updatedProjects = projects.filter((project: Project) => project.id !== id);
-
     await writeFile("src/projects.json", JSON.stringify(updatedProjects, null, 2));
-    return c.status(204); // Returnerer 204 No Content
-})
+
+    // Returner 204 No Content som bekreftelse på slettingen
+    return c.json(undefined, 204);
+});
 
 
 app.post('/v1/projects', async (c) => {
-    const newProject = await c.req.json(); 
-    const projectsData = JSON.parse(await readFile("src/projects.json", 'utf-8'))
+    try {
+        // Les request-body som JSON
+        const newProject = await c.req.json();
+        console.log("New Project:", newProject);
 
-    const createdProject = { id:  crypto.randomUUID(), ...newProject };
+        const fileProjects = await readFile("src/projects.json", 'utf-8');
+        const objectProjects = JSON.parse(fileProjects);
     
-    projectsData.push(createdProject);
+        const createdProject = { id: crypto.randomUUID(), ...newProject };
+    
+        objectProjects.push(createdProject);
 
-    await writeFile("src/projects.json", JSON.stringify(projectsData, null, 2));
-    return c.json(createdProject, 201); // Returnerer det lagde prosjektet, med 201 Created
-})
+        await writeFile("src/projects.json", JSON.stringify(objectProjects, null, 2));
+        console.log("Successfully written to file");
+
+        return c.json(createdProject, 201);
+    } catch (error) {
+        console.error("Unknown error:", error);
+        return c.json({ message: "Internal Server Error: An unknown error occurred." }, 500);
+    }
+});
+
 
 export default app;
