@@ -1,11 +1,14 @@
 import { projectsSchema } from "@/features/projects/helpers/schema";
 import { Project } from "@/types";
 import { ofetch } from "ofetch";
+import { endpoints } from "@/config/urls";
+
+const url = endpoints.projects;
 
 
   const fetchProjects = async () => {
     try {
-      const projects = await ofetch("http://localhost:3000/v1/projects");
+      const projects = await ofetch(url);
       console.log("API response:", projects);
       return projectsSchema.parse(projects) || []; // Returnerer en tom array hvis response er undefined
     } catch (error) {
@@ -17,7 +20,7 @@ import { ofetch } from "ofetch";
 
 const remove = async (id: string) => {
   try { 
-    await ofetch(`http://localhost:3000/v1/projects/${id}`, {
+    await ofetch(`${url}/${id}`, {
       method: "DELETE",
     });
   } catch (error) {
@@ -29,7 +32,7 @@ const remove = async (id: string) => {
 // Vi sier vi sender med "title", "tags" og description
 const create = async (data: Pick<Project, "title" | "tags" | "description">) => {
   try {
-    const createdProject = await ofetch("http://localhost:3000/v1/projects", {
+    const createdProject = await ofetch(url, {
       method: "POST",
       body: JSON.stringify(data), // Husk å sende som JSON-string
       headers: {
