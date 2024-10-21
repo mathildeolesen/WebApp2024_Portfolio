@@ -5,14 +5,6 @@ import { endpoints } from "@/config/urls";
 
 const url = endpoints.projects;
 
-type ProjectResponse = {
-  id: string;
-  title: string;
-  tags: string; // Forventet som kommaseparert streng fra API
-  description: string;
-  createdAt: string;
-};
-
 type Result<T> = {
   success: true;
   data: T;
@@ -27,21 +19,20 @@ type Result<T> = {
 
 const fetchProjects = async () => {
   try {
-      const response: Result<ProjectResponse[]> = await ofetch(url); // Forventet type fra API
+      const response: Result<Project[]> = await ofetch(url); // Forventet type fra API
       console.log("API response:", response);
 
       if (response.success) {
-        // Returner direkte uten å mappe over prosjektene
         return projectsSchema.parse(response.data); // Valider med Zod
       } else {
         // Håndter API-feil, med melding fra Result
         console.error("Error from API:", response.error.message);
-        return []; // Returner en tom array ved feil
+        return []; // Returnerer en tom array ved feil
       }
       
   } catch (error) {
       console.error("Fetch error:", error);
-      return []; // Returner en tom array ved feil
+      return []; // Returnerer en tom array ved feil
   }
 };
 
@@ -58,25 +49,21 @@ const remove = async (id: string) => {
       return true; // Sletting var vellykket
     } else {
       console.error("Error deleting project:", response.error.message);
-      return false; // Returner false hvis slettingen feilet
+      return false; // Returnerer false hvis slettingen feilet
     }
   } catch (error) {
     console.error("Error with delete request:", error);
-    return false; // Returner false ved nettverksfeil eller lignende
+    return false; // Returnerer false ved nettverksfeil eller lignende
   }
 };
 
 const create = async (data: Pick<Project, "title" | "tags" | "description" | "createdAt">) => {
   try {
-    // Konverter tags til kommaseparert streng før sending
-    const payload = {
-      ...data,
-      tags: data.tags.join(','), // Konverter tags fra array til streng
-    };
+    // Sier Pick<Project> uten "id", fordi id skal lages i backend
 
-    const response: Result<ProjectResponse> = await ofetch(url, {
+    const response: Result<Project> = await ofetch(url, {
       method: "POST",
-      body: JSON.stringify(payload),
+      body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
       }

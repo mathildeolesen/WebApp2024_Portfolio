@@ -2,6 +2,8 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { prisma } from "./prisma";
 import { Project, Result } from "./types/types";
+import { validateCreateProject } from "./features/projects/project.schema";
+import { validateProject } from "./helpers/schema";
 
 const app = new Hono();
 
@@ -19,6 +21,10 @@ app.get('/v1/projects', async (c) => {
             tags: project.tags.split(','), // Del opp tags-strengen til en array
         }));
 
+        const validateProjects = parsedProjects.map(project => {
+            const validationResult = validateProject(project);
+            return validationResult.success ? validationResult.data : null;
+        }).filter(project => project !== null);
     //return c.json(parsedProjects);
     return c.json({
         success: true,
@@ -93,16 +99,29 @@ app.delete('/v1/projects/:id', async (c) => {
 // Legg til et nytt prosjekt
 app.post('/v1/projects', async (c) => {
     try {
-        const newProject = await c.req.json();
-        console.log("New Project:", newProject);
+        const newProjectData = await c.req.json();
+        console.log("New Project:", newProjectData);
 
+        const validationResult = validateCreateProject(newProjectData);
+
+        if (!validationResult.success) {
+            return c.json({
+                success: false,
+                status: 400,
+                error: {
+                  code: "BAD_REQUEST",
+                  message: validationResult.error.errors,
+                }
+              });
+        }
         // Lag et nytt prosjekt i databasen
         const createdProject = await prisma.project.create({
             data: {
-                title: newProject.title,
-                tags: newProject.tags, // Vet at frontend sender en komma-separert string
-                description: newProject.description,
-                createdAt: newProject.createdAt, // Sett createdAt til nåværende tid
+                // Vi trenger ikke lage id her, fordi i prisma har vi @default(uuid()) som automatisk gir oss id
+                title: validationResult.data.title,
+                tags: validationResult.data.tags.join(','), // Vet at frontend sender en komma-separert string
+                description: validationResult.data.description,
+                createdAt: validationResult.data.createdAt, // Sett createdAt til nåværende tid
             },
         });
 
