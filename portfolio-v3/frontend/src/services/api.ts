@@ -13,13 +13,32 @@ type ProjectResponse = {
   createdAt: string;
 };
 
+type Result<T> = {
+  success: true;
+  data: T;
+  status: number;
+} | {
+  success: false;
+  error: {
+    code: string;
+    message: string;
+  };
+};
+
 const fetchProjects = async () => {
   try {
-      const projects: ProjectResponse[] = await ofetch(url); // Forventet type fra API
-      console.log("API response:", projects);
+      const response: Result<ProjectResponse[]> = await ofetch(url); // Forventet type fra API
+      console.log("API response:", response);
 
-      // Returner direkte uten å mappe over prosjektene
-      return projectsSchema.parse(projects); // Valider med Zod
+      if (response.success) {
+        // Returner direkte uten å mappe over prosjektene
+        return projectsSchema.parse(response.data); // Valider med Zod
+      } else {
+        // Håndter API-feil, med melding fra Result
+        console.error("Error from API:", response.error.message);
+        return []; // Returner en tom array ved feil
+      }
+      
   } catch (error) {
       console.error("Fetch error:", error);
       return []; // Returner en tom array ved feil
@@ -30,12 +49,20 @@ const fetchProjects = async () => {
 
 const remove = async (id: string) => {
   try { 
-    await ofetch(`${url}/${id}`, {
+    const response: Result<null> = await ofetch(`${url}/${id}`, {
       method: "DELETE",
     });
+
+    if (response.success) {
+      console.log("Project successfully deleted");
+      return true; // Sletting var vellykket
+    } else {
+      console.error("Error deleting project:", response.error.message);
+      return false; // Returner false hvis slettingen feilet
+    }
   } catch (error) {
-    console.error(error);
-    throw error;
+    console.error("Error with delete request:", error);
+    return false; // Returner false ved nettverksfeil eller lignende
   }
 };
 
@@ -47,7 +74,7 @@ const create = async (data: Pick<Project, "title" | "tags" | "description" | "cr
       tags: data.tags.join(','), // Konverter tags fra array til streng
     };
 
-    const createdProject = await ofetch(url, {
+    const response: Result<ProjectResponse> = await ofetch(url, {
       method: "POST",
       body: JSON.stringify(payload),
       headers: {
@@ -55,7 +82,12 @@ const create = async (data: Pick<Project, "title" | "tags" | "description" | "cr
       }
     });
 
-    return createdProject;
+    if (response.success) {
+      return response.data; // Returnerer opprettet prosjekt
+    } else {
+      console.error("Error from API:", response.error.message);
+    }
+
   } catch (error) {
     console.error("Error creating project:", error);
   }

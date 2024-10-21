@@ -2,6 +2,19 @@ import type { z } from "zod";
 
 import { projectSchema } from "../helpers/schema";
 
+export type Result<T> =
+  | {
+      success: true;
+      data: T;
+      status: number;
+    }
+  | {
+      success: false;
+      error: {
+        code: string;
+        message: string;
+      };
+    };
 
 /*
 export type Project = {
