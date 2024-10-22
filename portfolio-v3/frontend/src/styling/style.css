@@ -278,20 +278,20 @@ body {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 
     figure {
-        width: 180px;
-        margin: 8px;
+        display: inline-block;
+        height: inherit;
+        width: 40%; /* 180px; */
+        margin: auto 8px;
         border-radius: 18px;
         
         img {
-            width: 180px;
-            height: 100%;
-            border-radius: 18px;
+            width: auto; /* 180px; */
+            /* height: 100%; */
+            border-radius: 18px 0px 0px 18px;
 
             /* If alt-text is visible and not image */
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            text-align: center;
+            display: block;
+            max-width: 100%;
         }
     }
 

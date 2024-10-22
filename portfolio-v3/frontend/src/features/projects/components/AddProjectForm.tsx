@@ -105,10 +105,6 @@ export default function AddProjectForm(props: ProjectFormProps) {
           <label htmlFor="createdAt">Dato</label>
           <input type="date" id="createdAt" name="createdAt" onChange={updateCreatedAt} value={createdAt.substring(0, 10)} required />
         </div>
-        <div id="coverImage">
-          <label htmlFor="coverImage">Bilde</label>
-          <input type="file" id="coverImage" name="coverImage" />
-        </div>
         <button type="submit">Legg til</button>
       </form>
       <style>
